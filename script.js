@@ -1,12 +1,21 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+//Prompts and Confirms for function
 function generatePassword () {
   var passwordlength = prompt("How many characters would you like your password to contain?");
   var specialCharacters = confirm("Click Ok to confirm including special characters.");
   var numericCharacters = confirm ("Click OK to confirm including numeric characters.");
-  var lowerCase = confirm("Click OK to confrim including lower case characters.");
-  var upperCase = confirm ("Click OK to confirm upper case characters.");
+  var lowerCase = confirm("Click OK to confirm including lower case characters.");
+  var upperCase = confirm ("Click OK to confirm including upper case characters.");
+  Array = []; 
+
+  
+for(i = 0; i<passwordlength; i++) {
+  Array[i] = 
+
+
+}
 
 }
 
