@@ -1,8 +1,28 @@
 // // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// //Prompts and Confirms for function
-function generatePassword () {
+
+
+// // Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
+
+}
+
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
+
+//Consolidating functions in an object
+const randomFunc = {
+  lower: getRandomLower,
+  upper: getRandomUpper,
+  number: getRandomNumber,
+  special: getRandomSpecial
+};
+//Prompts and Confirms 
   var passwordlength = prompt("How many characters would you like your password to contain?");
   var specialCharacters = confirm("Click Ok to confirm including special characters.");
   var numericCharacters = confirm ("Click OK to confirm including numeric characters.");
@@ -15,11 +35,20 @@ function generatePassword () {
   const hasNumber = numericCharacters.valueOf();
   const hasLower = lowerCase.valueOf();
   const hasUpper = upperCase.valueOf();
-  
-  checkVariable(hasSpecial,hasNumber,hasLower,hasUpper); 
 
-  function checkVariable(special,number,lower,upper) {
-    let checkVariable = '';
+ //Code to enter password onto the screen.  
+  password.innerText = generatePassword (
+    hasLower,
+    hasUpper,
+    hasNumber,
+    hasSpecial,
+    length
+  )
+  
+  generatePassword(hasSpecial,hasNumber,hasLower,hasUpper); 
+
+  function generatePassword(special,number,lower,upper) {
+    let generatedPassword = '';
     const typesCount = special + number + lower + upper; 
     const typesArr = [{special},{number},{lower},{upper}].filter 
     (  
@@ -34,11 +63,12 @@ function generatePassword () {
       typesArr.forEach(type =>{
         const funcName = Object.keys(type)[0];
           
-        checkVariable += randomFunc[funcName]();
+        generatedPassword += randomFunc[funcName]();
       });
     }  
-        const finalPassword = checkVariable.slice(0,passLength); 
+        const finalPassword = generatedPassword.slice(0,passLength); 
         return finalPassword;
+        //console.log(generatedPassword.slice(0,passLength));
   }
 
   // var myArray = [];
@@ -49,7 +79,7 @@ function generatePassword () {
 //    console.log(myArray[i]);
 //  }
 // //   return console.log(pass);
-}
+//}
 
 //Functions for User's Critera
 function getRandomLower() {
@@ -68,26 +98,7 @@ function getRandomSpecial() {
   return String.fromCharCode(Math.floor(Math.random()*15)+33);
 }
 
-//Consolidating functions in an object
-const randomFunc = {
-  lower: getRandomLower,
-  upper: getRandomUpper,
-  number: getRandomNumber,
-  special: getRandomSpecial
-};
-
-// // Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
 
 
 
-//math.floor, math.random, arrays... generate password function nees to be created... function should be returning password for passwordtext
+
